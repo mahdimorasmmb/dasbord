@@ -14,8 +14,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+
   },
-  "include": ["src"],
+  "include": ["src", "createPaletee.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
