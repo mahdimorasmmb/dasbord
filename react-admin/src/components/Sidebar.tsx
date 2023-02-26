@@ -1,4 +1,4 @@
-import { ChevronLeft } from "@mui/icons-material";
+import { ChevronLeft, Groups2Outlined, HomeOutlined, PublicOffOutlined, ReceiptLongOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Drawer, IconButton, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,6 +10,33 @@ interface Props {
   setIsSidebarOpen: (value: boolean) => void;
   isNonMobile: boolean;
 }
+
+const navItems = [
+  {
+    text:"Dashboard",
+    icon:<HomeOutlined/>
+  },
+  {
+    text:"Client Facing",
+    icon:null
+  },
+  {
+    text:"Products",
+    icon:<ShoppingCartOutlined/>
+  },
+  {
+    text:"Customers",
+    icon:<Groups2Outlined/>
+  },
+  {
+    text:"Transactions",
+    icon:<ReceiptLongOutlined/>
+  },
+  {
+    text:"Geography",
+    icon:<PublicOffOutlined/>
+  }
+]
 
 const Sidebar = ({
   drawerWidth,
