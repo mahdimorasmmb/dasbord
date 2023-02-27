@@ -6,8 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { store } from "./state";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
-
+setupListeners(store.dispatch)
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

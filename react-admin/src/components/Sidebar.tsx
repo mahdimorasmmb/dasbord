@@ -1,44 +1,106 @@
-import { ChevronLeft, Groups2Outlined, HomeOutlined, PublicOffOutlined, ReceiptLongOutlined, ShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Drawer, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  AdminPanelSettingsOutlined,
+  CalendarMonthOutlined,
+  ChevronLeft,
+  ChevronRightOutlined,
+  Groups2Outlined,
+  HomeOutlined,
+  PieChartOutline,
+  PointOfSaleOutlined,
+  PublicOffOutlined,
+  ReceiptLongOutlined,
+  SettingsOutlined,
+  ShoppingCartOutlined,
+  TodayOutlined,
+  TrendingUpOutlined,
+} from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-
+import profileImage from "assets/profile.jpg";
+import Avatar from "./Avatar";
 interface Props {
   drawerWidth: any;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (value: boolean) => void;
   isNonMobile: boolean;
+  user: UserType;
 }
 
 const navItems = [
   {
-    text:"Dashboard",
-    icon:<HomeOutlined/>
+    text: "Dashboard",
+    icon: <HomeOutlined />,
   },
   {
-    text:"Client Facing",
-    icon:null
+    text: "Client Facing",
+    icon: null,
   },
   {
-    text:"Products",
-    icon:<ShoppingCartOutlined/>
+    text: "Products",
+    icon: <ShoppingCartOutlined />,
   },
   {
-    text:"Customers",
-    icon:<Groups2Outlined/>
+    text: "Customers",
+    icon: <Groups2Outlined />,
   },
   {
-    text:"Transactions",
-    icon:<ReceiptLongOutlined/>
+    text: "Transactions",
+    icon: <ReceiptLongOutlined />,
   },
   {
-    text:"Geography",
-    icon:<PublicOffOutlined/>
-  }
-]
+    text: "Geography",
+    icon: <PublicOffOutlined />,
+  },
+  {
+    text: "Sales",
+    icon: null,
+  },
+  {
+    text: "Overview",
+    icon: <PointOfSaleOutlined />,
+  },
+  {
+    text: "Daily",
+    icon: <TodayOutlined />,
+  },
+  {
+    text: "Monthly",
+    icon: <CalendarMonthOutlined />,
+  },
+  {
+    text: "‌Breakdown",
+    icon: <PieChartOutline />,
+  },
+  {
+    text: "Management",
+    icon: null,
+  },
+  {
+    text: "Admin",
+    icon: <AdminPanelSettingsOutlined />,
+  },
+  {
+    text: "Performance",
+    icon: <TrendingUpOutlined />,
+  },
+];
 
 const Sidebar = ({
+  user,
   drawerWidth,
   isNonMobile,
   isSidebarOpen,
@@ -51,7 +113,6 @@ const Sidebar = ({
 
   useEffect(() => {
     setActive(pathname.substring(1));
-    console.log(active);
   }, [pathname]);
   return (
     <Box component="nav">
@@ -86,6 +147,83 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
+            <List>
+              {navItems.map(({ icon, text }) => {
+                if (!icon) {
+                  return (
+                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                      {text}
+                    </Typography>
+                  );
+                }
+                const lcText = text.toLowerCase();
+
+                return (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        navigate(`/${lcText}`);
+                        setActive(lcText);
+                      }}
+                      sx={{
+                        backgroundColor:
+                          active === lcText
+                            ? theme.palette.customSecondary[300]
+                            : "transparent",
+                        color:
+                          active === lcText
+                            ? theme.palette.customPrimary[600]
+                            : theme.palette.customSecondary[200],
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          ml: "2rem",
+                          color:
+                            active === lcText
+                              ? theme.palette.customPrimary[600]
+                              : theme.palette.customSecondary[200],
+                        }}
+                      >
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={text}>
+                        {active === lcText && (
+                          <ChevronRightOutlined sx={{ mml: "auto" }} />
+                        )}
+                      </ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+          <Box mb="1rem" mr="1rem">
+            <Divider />
+            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
+              <Avatar profileImage={profileImage} />
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
+                  sx={{ color: theme.palette.customSecondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{ color: theme.palette.customSecondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{
+                  color: theme.palette.customSecondary[300],
+                  fontSize: "25px",
+                }}
+              />
+            </FlexBetween>
           </Box>
         </Drawer>
       )}
