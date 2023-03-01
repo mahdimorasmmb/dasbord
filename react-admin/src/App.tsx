@@ -6,6 +6,8 @@ import Dashboard from "scenes/dashboard";
 import Layout from "scenes/layout";
 import { themeSettings } from "theme";
 import type { RooState } from "state";
+import Products from "scenes/products";
+import Customers from "scenes/customers";
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/products" element={<Products/>}/>
+            <Route path="/customers" element={<Customers/>}/>
           </Route>
         </Routes>
       </ThemeProvider>

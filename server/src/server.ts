@@ -10,8 +10,13 @@ import clientRoutes from "./routes/client";
 import genralRoutes from "./routes/general";
 import managmentRoutes from "./routes/management";
 import salesRoutes from "./routes/sales";
+
+
 import User from "./models/User";
-import { dataUser } from "./data";
+import { dataUser,dataProduct,dataProductStat, dataTransaction } from "./data";
+import Product from "./models/Product";
+import ProductStat from "./models/ProductStat";
+import Transaction from "./models/TransactionSchema";
 
 dotenv.config();
 const app = express();
@@ -40,5 +45,11 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     // User.insertMany(dataUser)
+    // Product.insertMany(dataProduct)
+    // ProductStat.insertMany(dataProductStat)
+
+    // Product.create({category:"mmb",description:"sdfdfdsfsdf",name:"sdfsdfdsf",price:2,rating:"sadasdsa",supply:100
+    // })
+    // Transaction.insertMany(dataTransaction)
   })
   .catch((error) => console.log(`${error}did not conect`));

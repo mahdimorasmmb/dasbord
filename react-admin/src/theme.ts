@@ -1,9 +1,13 @@
 import { createTheme, Theme } from "@mui/material";
-import { ColorPartial, PaletteColorOptions } from "@mui/material/styles/createPalette";
+import { ColorPartial, PaletteColorOptions ,PaletteColor} from "@mui/material/styles/createPalette";
 
+interface Neutral extends ColorPartial  {
+  main:string
+}
 interface CustomPaletteColors {
   customPrimary: ColorPartial;
   customSecondary: ColorPartial;
+  neutral:Neutral
 } 
 
 declare module "@mui/material/styles/createPalette" {
